@@ -1,0 +1,19 @@
+.header-section{
+    @include flex(row,space-between,center);
+    width: 100%;
+    max-width: 1240px;
+    margin: 32px 5%;
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        margin: 16px 5%;
+    }
+        img {
+        height: 68px;
+        width: 210px;
+        }
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        img {
+            height: 47px;
+            width: 145px;
+            }
+        }
+}

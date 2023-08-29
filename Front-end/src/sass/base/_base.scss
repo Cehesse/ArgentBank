@@ -1,0 +1,29 @@
+#root{
+    @include flex(column,center,center);
+    box-sizing: border-box;
+    padding: 0 $padding-page-border;
+}
+
+.App{
+    @include flex(column,center,center);
+    width: 100%;
+}
+
+.pages{
+    max-width: 1240px;
+    width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: $font;
+}
+
+a{
+    text-decoration: none;
+}

@@ -1,0 +1,17 @@
+.nav-section{
+    @include flex(row,center,flex-end);
+    column-gap: 40px;
+    font-size: $font-size-large;
+    font-weight: $font-weight-medium;
+        &__link {
+        color: $color-primary;
+            &:focus{
+            text-decoration: underline solid $color-primary; 
+            }
+        }
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        font-size: 12px;
+        text-transform: uppercase;
+        column-gap: 12px;
+        }
+}

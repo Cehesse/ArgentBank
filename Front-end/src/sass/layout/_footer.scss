@@ -1,0 +1,22 @@
+.footer-section{
+    @include flex(column,center,center);
+    width: 115%;
+    max-width: 1440px;
+    background-color: $color-black;
+    row-gap: 40px;
+    padding: 24px;
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        row-gap: 16px;
+        padding: 56px 120px;
+        }
+        &__legal{
+            color: $color-white;
+            font-size: $font-size-large;
+            font-weight: $font-weight-medium;
+            @media screen and (max-width: map-get($breakpoints, mobile)){
+                font-size: 12px;
+                column-gap: 12px;
+                text-align: center;
+                }
+        }
+}
