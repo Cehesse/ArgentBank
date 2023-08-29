@@ -1,11 +1,14 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
 #root{
-    @include flex(column,center,center);
+    @include mixins.flex(column,center,center);
     box-sizing: border-box;
-    padding: 0 $padding-page-border;
+    padding: 0 variables.$padding-page-border;
 }
 
 .App{
-    @include flex(column,center,center);
+    @include mixins.flex(column,center,center);
     width: 100%;
 }
 
@@ -21,7 +24,7 @@
 }
 
 body {
-    font-family: $font;
+    font-family: variables.$font;
 }
 
 a{

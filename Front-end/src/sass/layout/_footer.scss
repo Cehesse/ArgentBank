@@ -1,19 +1,23 @@
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
 .footer-section{
-    @include flex(column,center,center);
+    @include mixins.flex(column,center,center);
     width: 115%;
     max-width: 1440px;
-    background-color: $color-black;
+    background-color: variables.$color-black;
     row-gap: 40px;
     padding: 24px;
-    @media screen and (max-width: map-get($breakpoints, mobile)){
+    @media screen and (max-width: map.get(variables.$breakpoints, mobile)){
         row-gap: 16px;
         padding: 56px 120px;
         }
         &__legal{
-            color: $color-white;
-            font-size: $font-size-large;
-            font-weight: $font-weight-medium;
-            @media screen and (max-width: map-get($breakpoints, mobile)){
+            color: variables.$color-white;
+            font-size: variables.$font-size-large;
+            font-weight: variables.$font-weight-medium;
+            @media screen and (max-width: map.get(variables.$breakpoints, mobile)){
                 font-size: 12px;
                 column-gap: 12px;
                 text-align: center;
