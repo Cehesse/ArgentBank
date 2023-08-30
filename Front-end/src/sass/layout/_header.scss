@@ -5,19 +5,16 @@
 .header-section{
     @include mixins.flex(row,space-between,center);
     width: 100%;
-    max-width: 1240px;
-    margin: 32px 5%;
-    @media screen and (max-width: map.get(variables.$breakpoints, mobile)){
-        margin: 16px 5%;
-    }
-        img {
-        height: 68px;
-        width: 210px;
+    padding: 5px 2%;
+/*     @media screen and (max-width: map.get(variables.$breakpoints, mobile)){
+        margin: 16px 1%;
+    } */
+    img {
+        height: 50px;
+        width: 200px;
         }
-    @media screen and (max-width: map.get(variables.$breakpoints, mobile)){
-        img {
-            height: 47px;
-            width: 145px;
-            }
+    & h1 {
+            display: none;
         }
+
 }

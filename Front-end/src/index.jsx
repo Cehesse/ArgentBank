@@ -8,6 +8,8 @@ import "./sass/main.scss";
 
 //PAGES
 import Home from "./pages/Home"
+import Signin from "./pages/Sign-in"
+import User from "./pages/User"
 
 //LAYOUT
 import Header from "./layout/Header"
@@ -22,6 +24,8 @@ root.render(
         <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/" element={<Signin />} />
+            <Route path="/" element={<User />} />
           </Routes>
       <Footer />
       </div>

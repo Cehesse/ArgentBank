@@ -1,8 +1,8 @@
 //REACT
-/* import { Link } from "react-router-dom"; */
+import { Link } from "react-router-dom";
 
 //IMG
-/* import Logo from "../../assets/img/logo.png" */
+import Logo from "../../assets/img/argentBankLogo.webp"
 
 //LAYOUT
 import Navbar from "../Navbar"
@@ -11,7 +11,14 @@ import Navbar from "../Navbar"
 export default function Header() {
 	return (
 		<header className="header-section">
-			{/* <Link to="/"><img src={Logo} alt="Logo de KASA" /></Link> */}
+			<Link className="header-section__logo" to="/">
+    		<img
+          	className="header-section__logo-image"
+          	src={Logo}
+          	alt="Argent Bank Logo"
+        	/>
+        	<h1 className="nav-section__title">Argent Bank</h1>
+      		</Link>
 			<Navbar />
 		</header>
 	)

@@ -1,7 +1,7 @@
 //COMPONENTS
 
 //FCT
-function Home() {
+function Signin() {
     return (
       <div className="pages">
       <main className="">
@@ -11,4 +11,4 @@ function Home() {
     )
   }
 
-  export default Home
+  export default Signin

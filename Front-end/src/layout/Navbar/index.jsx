@@ -1,12 +1,15 @@
-//REACT
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-//FCT
-export default function Navbar() {
-	return (
-		<nav className="nav-section">
-			<Link to="/" className="nav-section__link">Accueil</Link>
-			<Link to="/about" className="nav-section__link">A Propos</Link>
-		</nav>
-	);
-}
+const Navbar = () => {
+  return (
+    <nav className="nav-section">
+        <Link className="nav-section__link" to="/sign-in">
+          <i className="fa fa-user-circle nav-section__icone"></i>
+          Sign In
+        </Link>
+    </nav>
+  );
+};
+
+export default Navbar;
