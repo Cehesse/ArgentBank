@@ -8,9 +8,9 @@
     font-size: variables.$font-size-medium;
     font-weight: variables.$font-weight-medium;
         &__link {
-        color: variables.$color-black;
+        color: variables.$color-secondary;
             &:hover{
-            text-decoration: underline solid variables.$color-black; 
+            text-decoration: underline solid variables.$color-secondary; 
             }
         }
         &__icone{
