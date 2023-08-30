@@ -1,0 +1,31 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+#root{
+    @include mixins.flex(column,center,center);
+    box-sizing: border-box;
+    padding: 0 variables.$padding-page-border;
+}
+
+.App{
+    @include mixins.flex(column,center,center);
+    width: 100%;
+}
+
+.pages{
+    width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: variables.$font;
+}
+
+a{
+    text-decoration: none;
+}

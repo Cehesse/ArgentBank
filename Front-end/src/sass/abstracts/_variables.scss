@@ -1,0 +1,25 @@
+//Color
+
+$color-primary: rgb(0, 188, 119);
+$color-secondary: rgb(44, 62, 80);
+$color-white: hsl(0,0%,100%);
+$color-black: hsl(0,0%,0%);
+$color-bg-1: #F6F6F6;
+
+//Breakpoints map
+$breakpoints: (
+  "mobile": 767.98px,
+  "tablette": 1023.98px,
+);
+
+// Font
+$font: Avenir, Helvetica, Arial, sans-serif;
+$font-size-large: 24px;
+$font-size-medium: 18px;
+$font-size-small: 16px;
+$font-weight-blod: 700;
+$font-weight-medium: 500;
+$font-weight-normal: 300;
+
+//padding
+$padding-page-border: 0%;
