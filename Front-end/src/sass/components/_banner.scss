@@ -1,0 +1,26 @@
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.banner-section{
+    @include mixins.flex(row,flex-end,center);
+    width: 100%;
+    height: 400px;
+    background-image: url("../../assets/img/banner-img.webp");
+    background-position: 0 33%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &_explain {
+        @include mixins.flex(column,flex-start,flex-start);
+        position: relative;
+        right: 7%;
+        width: 364px;
+        padding: 32px 64px 32px 32px;
+        background-color: variables.$color-white;
+        row-gap: 8px;
+        }
+    &_text{
+        padding-top: 8px;
+        font-size: 18px;
+    }
+}
