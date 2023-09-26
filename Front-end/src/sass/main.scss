@@ -15,9 +15,13 @@
 @use "layout/footer";
 
 // 5. Components
+@use "components/bankaccount";
 @use "components/banner";
+@use "components/button";
 @use "components/card";
+@use "components/modal";
 
 // 6. Page-specific styles
 @use "pages/home";
 @use "pages/signin";
+@use "pages/user";
