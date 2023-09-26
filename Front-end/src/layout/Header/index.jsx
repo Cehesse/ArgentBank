@@ -1,13 +1,8 @@
-//REACT
+import React from "react";
 import { Link } from "react-router-dom";
-
-//IMG
 import Logo from "../../assets/img/argentBankLogo.webp"
-
-//LAYOUT
 import Navbar from "../Navbar"
 
-//FCT
 export default function Header() {
 	return (
 		<header className="header-section">

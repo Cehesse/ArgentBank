@@ -1,24 +1,41 @@
 import React from "react";
-import { useState } from 'react';
-//COMPONENTS
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { callAPI } from "../../api"
+import { setToken, setError } from "../../redux/Userslide";
 
-//FCT
 function Signin() {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const error = useSelector((state) => state.user.error);
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    try {
+        const response = await callAPI("login", null, {
+          email: email,
+          password: password,
+        });        
+        const token = response.body.token; // Extrait le token de la réponse API
+        // Dispatch l"action setToken avec le token récupéré pour mettre à jour le state
+        dispatch(setToken(token));
+        // Effectuer la redirection manuelle vers la page User après la connexion réussie
+        navigate("/user");
+      } catch (error) {
+        dispatch(setError("Erreur de connexion : email ou mot de passe incorrect."));
+      }
  ;}
-
 
     return (
       <div className="pages">
         <main className="bg-dark">
           <section className="section-sign-in">
             <i className="fa fa-user-circle section-sign-in_icon"></i>
-            <h1>Sign In</h1>
+            <h2>Sign In</h2>
             <form onSubmit={handleSignIn}>
               <div className="section-sign-in_input-wrapper">
                 <label htmlFor="email">Username</label>
@@ -46,9 +63,9 @@ function Signin() {
                 <span>Sign In</span>
               </button>
             </form>
-    {/*         <div className="input-error">
+            <div className="input-error">
               {error && <p>{error}</p>}
-            </div> */}
+            </div>
           </section>
         </main>
       </div>
