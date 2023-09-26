@@ -1,3 +1,14 @@
 @use "sass:map";
 @use "../abstracts/mixins";
 @use "../abstracts/variables";
+
+.footer-section{
+    @include mixins.flex(row,center,center);
+    width: 100%;
+    padding: 32px 2%;
+    border-top: 2px solid #ccc;
+    &_text {
+        font-size: 24px;
+        }
+
+}

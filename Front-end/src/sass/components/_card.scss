@@ -1,0 +1,25 @@
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.card-item{
+    @include mixins.flex(column,space-between,center);
+    width: 28%;
+    padding: 0px 3%;
+    row-gap: 24px;
+    &_icon {
+        width: 150px;
+        border: 10px solid variables.$color-primary;
+        border-radius: 50%;
+        padding: 16px;
+    }
+    &_title{
+        font-weight: variables.$font-weight-blod;
+        text-align: center;
+        height: 30px;
+    }
+    &_text{
+        height: 48px;
+        text-align: center;
+    }
+}
