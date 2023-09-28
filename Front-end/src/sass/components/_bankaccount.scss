@@ -29,5 +29,11 @@
         position: absolute;
         top: 35%;
         right: 3%;
+        width: 50%;
+    @media screen and (max-width: map-get(variables.$breakpoints, tablette)){
+        position: relative;
+        width: 100%;
+        right: 0%;
+        }
     }
 }

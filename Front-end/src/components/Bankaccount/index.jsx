@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../../components/Button";
 import accounts from "../../data/accounts";
 
 function Bankaccount() {
@@ -14,7 +13,7 @@ function Bankaccount() {
                     <p className="account-item_balance">{table.balance}</p>
                 </div>
                 <div className="account-item_transaction">
-                  <Button text="View transactions"/>
+                <button className="button--green account-item_transaction" >View transactions</button>
                 </div>
             </section>
             )
