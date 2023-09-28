@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 import { callAPI } from "../../api"
 import { setToken, setError } from "../../redux/Userslide";
 
@@ -12,6 +13,19 @@ function Signin() {
   const [password, setPassword] = useState("");
   const error = useSelector((state) => state.user.error);
   const navigate = useNavigate();
+  let token = useSelector((state) => state.user.token);
+
+  if (!token) {
+    token = sessionStorage.getItem("token", token);
+  }
+
+  useEffect(() => {
+    if (token) {
+      // Redirige vers la page User si token
+      return navigate("/user");
+      ;
+    }
+  });
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -21,12 +35,16 @@ function Signin() {
           password: password,
         });        
         const token = response.body.token; // Extrait le token de la réponse API
-        // Dispatch l"action setToken avec le token récupéré pour mettre à jour le state
-        dispatch(setToken(token));
+        // Dispatch l'action setToken avec le token récupéré pour mettre à jour le state si Remenber me est cocher
+        if (document.getElementById("remember-me").checked) {
+          dispatch(setToken(token));
+        } else {
+          sessionStorage.setItem("token", token);
+        }
         // Effectuer la redirection manuelle vers la page User après la connexion réussie
         navigate("/user");
       } catch (error) {
-        dispatch(setError("Erreur de connexion : email ou mot de passe incorrect."));
+        dispatch(setError("Email ou mot de passe incorrect."));
       }
  ;}
 
@@ -35,7 +53,7 @@ function Signin() {
         <main className="bg-dark">
           <section className="section-sign-in">
             <i className="fa fa-user-circle section-sign-in_icon"></i>
-            <h2>Sign In</h2>
+            <h2 className="section-sign-in_title">Sign In</h2>
             <form onSubmit={handleSignIn}>
               <div className="section-sign-in_input-wrapper">
                 <label htmlFor="email">Username</label>
@@ -56,14 +74,17 @@ function Signin() {
                 />
               </div>
               <div className="section-sign-in_input-remember">
-                <input type="checkbox" id="remember-me" />
+              <input
+                type="checkbox"
+                id="remember-me"
+                />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
               <button className="section-sign-in_button" id="connect" type="submit" >
                 <span>Sign In</span>
               </button>
             </form>
-            <div className="input-error">
+            <div className="section-sign-in_input-error">
               {error && <p>{error}</p>}
             </div>
           </section>

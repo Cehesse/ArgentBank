@@ -6,13 +6,24 @@ import { callAPI } from "../../api";
 
 function Modal() {
     const [modal, setModal] = useState(false);
-    const token = useSelector((state) => state.user.token);
+    const [isButtonHidden, setIsButtonHidden] = useState(false);
+    let token = useSelector((state) => state.user.token);
     const userProfile = useSelector((state) => state.profil);
     const [useName, setUseName] = useState(userProfile.userName);
     const dispatch = useDispatch();
 
-    const toggleModal = () => {
+    if (!token) {
+        token = sessionStorage.getItem("token", token);
+      }
+
+    const toggleModalOpen = () => {
         setModal(!modal);
+        setIsButtonHidden(true);
+    }
+
+    const toggleModalClose = () => {
+        setModal(!modal);
+        setIsButtonHidden(false);
     }
 
     const userNameChange = async (e) => {
@@ -20,7 +31,8 @@ function Modal() {
         try {
             const data = await callAPI ("profilePut", token, {userName: useName});
             dispatch(profilUser({data}));
-            setUseName(""); 
+            setUseName(useName);
+            toggleModalClose();
         } catch (error) {
             console.log (error, "Erreur à l'appel d'API pour le changement d'Username");
         }
@@ -28,32 +40,51 @@ function Modal() {
 
     return (
         <>
-        <button className="edit-button" onClick={toggleModal}>Edit Name</button>
+        {!isButtonHidden && ( 
+        <>
+        <h2 className="section-user_title">Welcome back</h2>
+        <p className="section-user_user">{userProfile.firstName} {userProfile.lastName} !</p>
+        <button className="button--green" onClick={toggleModalOpen}>Edit Name</button>
+        </>
+        )}
         {modal && (
             <div className="modal">
-                <div className="overlay"></div>
-                <div className="modal-content">
-                    <h3>Changement d"Username</h3>
-                    {/* Tout le monde n"a pas un userName */}
-                    {userProfile.userName ? (<p> Votre username actuel: {userProfile.userName}</p>) : (<p> Pas d"username actuellement</p>)}
-                    {/* Faire un form pour récupérer le nouveau username */}
-                    <form onSubmit={userNameChange}>
-                        <div className="input-wrapper">
-                            <label htmlFor="username">Nouveau Username :</label>
+                    <h3 className="modal_title">Edit user info</h3>
+                    <form className="modal_form" onSubmit={userNameChange}>
+                        <div className="modal_input-wrapper">
+                            <label htmlFor="username">User name :</label>
                             <input 
                             type="text" 
                             id="username" 
                             value={useName}
                             onChange={(e) => setUseName(e.target.value)}
                             />
-                        </div>
-                        <button className="sign-in-button" id="connect" type="submit">
-                            <span>Submit</span>
-                        </button>
+                         </div>
+                         <div className="modal_input-wrapper">
+                         <label htmlFor="firstname">First name :</label>
+                            <input 
+                            type="text" 
+                            id="firstname" 
+                            value={userProfile.firstName}
+                            disabled="disabled"
+                            />
+                         </div>
+                         <div className="modal_input-wrapper">
+                         <label htmlFor="lastname">Last name :</label>
+                            <input 
+                            type="text" 
+                            id="lastname" 
+                            value={userProfile.lastName}
+                            disabled="disabled"
+                            />
+                         </div>
+                         <div className="modal_buttons">
+                            <button className="button--green modal_button" id="connect" type="submit">Save</button>
+                            <button className="button--green modal_button" onClick={toggleModalClose}> Cancel </button>
+                         </div>
+                        
                     </form>
-                    <button className="close-modal" onClick={toggleModal}> X </button>
                 </div>
-            </div>
         )}
         </>
     );

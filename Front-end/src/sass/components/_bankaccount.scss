@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.account-item{
+    @include mixins.flex(column,space-between,center);
+    border: 1px solid variables.$color-black;
+    background-color: variables.$color-white;
+    width: 80%;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: left;
+    margin-bottom: 32px;
+    position: relative;
+    &_content-wrapper {
+        @include mixins.flex(column,space-between,flex-start);
+        row-gap: 12px;
+        width: 100%;
+        }
+    &_name{
+        font-size: variables.$font-size-small;
+        font-weight: normal;
+    }
+    &_sold{
+        font-size: 40px;
+        font-weight: bold;
+        }
+    &_transaction{
+        position: absolute;
+        top: 35%;
+        right: 3%;
+    }
+}

@@ -5,4 +5,9 @@
 .cards{
     padding: 48px;
     @include mixins.flex(row,space-between,center);
+    @media screen and (max-width: map-get(variables.$breakpoints, tablette)){  
+        @include mixins.flex(column,space-between,center);
+        padding: 48px 0;
+        row-gap: 64px;
+    }
 }

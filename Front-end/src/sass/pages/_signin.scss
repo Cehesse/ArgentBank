@@ -8,7 +8,7 @@
     width: 320px;
     margin: 0 auto;
     padding: 32px;
-    & h1{
+    &_title{
         padding-bottom: 32px;
         font-size: variables.$font-size-large;
         }
@@ -43,5 +43,9 @@
         background-color: #00bc77;
         color: #fff;
         text-decoration : underline;   
+    }
+    &_input-error{
+        margin-top: 16px;
+        text-align: center;
     }
 }

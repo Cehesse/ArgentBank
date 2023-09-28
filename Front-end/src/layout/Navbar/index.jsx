@@ -1,19 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/Userslide"
 
 const Navbar = () => {
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.user.token);
+  let token = useSelector((state) => state.user.token);
   const userProfile = useSelector((state) => state.profil);
+  const navigate = useNavigate();
+
+  if (!token) {
+    token = sessionStorage.getItem("token", token);
+  }
 
   const handleLogout = () => {
-      // Supprimer le token de localStorage
+      // Supprimer le token
       localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       // Dispatch de l"action "logout" pour supprimer le token
       dispatch(logout());
+      // Retourner à l'acceuil
+      navigate("/");
   };
 
   return (

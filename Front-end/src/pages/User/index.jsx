@@ -5,24 +5,27 @@ import { profilUser } from "../../redux/Profilslide";
 import { callAPI } from "../../api";
 import Bankaccount from "../../components/Bankaccount";
 import Modal from "../../components/Modal";
-import Button from "../../components/Button";
 
 function User() {
     const dispatch = useDispatch();
-    const token = useSelector((state) => state.user.token);
-    const userProfile = useSelector((state) => state.profil);
+    let token = useSelector((state) => state.user.token);
     const navigate = useNavigate();
+
+    if (!token) {
+      token = sessionStorage.getItem("token", token);
+      ;
+    }
 
     useEffect(() => {
       if (!token) {
-        // Redirige vers la page d"accueil si pas de token
-        return navigate("/");
+        // Redirige vers la page d'accueil si pas de token
+        return navigate("/sign-in");
         ;
       }
     });
 
     useEffect(() => {
-        // récupérer les données de l"utilisateur
+        // récupérer les données de l'utilisateur
         const dataUser = async () => {
             try {
                 const data = await callAPI ("profilePost", token, {});
@@ -36,22 +39,17 @@ function User() {
     
     return (
       <div className="pages">
-        <main className="main bg-dark2">
-          {userProfile ? (
-              <div className="header">
-              <h2>Welcome back<br />{userProfile.firstName} {userProfile.lastName} !</h2>
-              <Modal />
-              </div>
-          ) : (
-              <div className="header">
-              <h1>Welcome back!</h1>
-              <Button text="Edit name" />
-              </div>
-          )}
-          <h3 className="sr-only">Accounts</h3>
-          <Bankaccount />
-          </main>
-        </div>
+        <main className="bg-dark">
+          <section className="section-user">
+            <div className="section-user_profil">
+                <Modal />
+            </div>
+            <div className="section-user_accounts">
+              <Bankaccount />
+            </div>
+          </section>
+        </main>
+      </div>
     );
   }
 

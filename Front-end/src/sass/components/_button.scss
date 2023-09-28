@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.button--green{
+    padding: 8px;
+    font-size: variables.$font-size-medium;
+    font-weight: bold;
+    margin-top: 16px;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+}

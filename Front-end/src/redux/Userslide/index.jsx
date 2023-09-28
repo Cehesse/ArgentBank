@@ -25,8 +25,7 @@ const userSlice = createSlice({
     logout: (state) => {
       state.token = null; // Réinitialise le token à null
       state.error = null; // Réinitialise l'erreur à null
-      // Supprime éventuellement le token du localStorage
-      // localStorage.removeItem("token");
+      localStorage.removeItem("token"); // Supprime le token du localStorage
     },
   },
 });
