@@ -1,0 +1,460 @@
+openapi: 3.0.1
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  termsOfService: http://swagger.io/terms/
+  version: 2.0.0
+servers:
+- url: http://localhost:3001/api/v2
+paths:
+  /user/login:
+    post:
+      tags:
+      - User Module
+      summary: Login
+      description: API for Login
+      requestBody:
+        description: Login Payload
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        200:
+          description: Login Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+  /user/signup:
+    post:
+      tags:
+      - User Module
+      summary: Signup
+      description: API for Signup
+      requestBody:
+        description: Signup Payload
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: Signup Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+  /user/profile:
+    put:
+      tags:
+      - User Module
+      summary: User Profile API
+      description: API for updating a user profile
+      requestBody:
+        description: Update user profile attributes
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+        required: true
+      responses:
+        200:
+          description: User profile retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - User Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      responses:
+        200:
+          description: User profile retrieved successully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+  /user/transactions:
+    get:
+      tags:
+      - Transactions module
+      summary: Transactions Profile API
+      description: API for fetching transactions
+      parameters:
+      - name: Authorization
+        in: header
+        description: Attach token
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: User transactions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+        400:
+          description: Invalid Fields
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        404:
+          description: Transactions not found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+    post:
+      tags:
+      - Transactions module
+      summary: Transaction Add API
+      description: API for adding a new transaction
+      parameters:
+      - name: Authorization
+        in: header
+        description: Attach token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Transaction info needed to create a new transaction
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/NewTransaction'
+        required: true
+      responses:
+        200:
+          description: Transaction added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+      x-codegen-request-body-name: body
+  /user/transaction/{idTransaction}:
+    get:
+      tags:
+      - Transactions module
+      summary: Transaction Show API
+      description: API for showing a transaction
+      parameters:
+      - name: Authorization
+        in: header
+        description: Attach token
+        required: true
+        schema:
+          type: string
+      - name: idTransaction
+        in: path
+        description: Id of the transaction
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Transaction retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        404:
+          description: Transaction not found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+    put:
+      tags:
+      - Transactions module
+      summary: Transaction Edit API
+      description: API for updating a transaction
+      parameters:
+      - name: Authorization
+        in: header
+        description: Attach token
+        required: true
+        schema:
+          type: string
+      - name: idTransaction
+        in: path
+        description: Id of the transaction that needs to be edited
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Edit transaction
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/EditTransaction'
+        required: true
+      responses:
+        200:
+          description: Transaction edited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionApiResponse'
+        400:
+          description: Invalid Fields
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        404:
+          description: Transaction not found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - Transactions module
+      summary: Transaction Delete API
+      description: API for deleting a transaction
+      parameters:
+      - name: Authorization
+        in: header
+        description: Attach token
+        required: true
+        schema:
+          type: string
+      - name: idTransaction
+        in: path
+        description: Id of the transaction that needs to be deleted
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Transaction deleted successfully
+          content: {}
+        400:
+          description: Invalid Fields
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        404:
+          description: Transaction not found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      security:
+      - Bearer: []
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          description: user email
+        password:
+          type: string
+          description: user password
+        firstName:
+          type: string
+          description: user first name
+        lastName:
+          type: string
+          description: user last name
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          description: user email
+        password:
+          type: string
+          description: user password
+    UserProfile:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+    UserApiResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+    LoginApiResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    Transactions:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            transaction:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Id of the transaction
+                date:
+                  type: string
+                  description: Date of the transaction
+                description:
+                  type: string
+                  description: Description of transaction
+                amount:
+                  type: number
+                  description: Amount of the transaction
+                transactiontype:
+                  type: string
+                  description: Transaction type of the transaction
+                category:
+                  type: string
+                  description: Category of transaction
+                note:
+                  type: string
+                  description: note of transaction
+              description: transaction
+    TransactionApiResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Id of the transaction
+            date:
+              type: string
+              description: Date of the transaction
+            description:
+              type: string
+              description: Description of transaction
+            amount:
+              type: number
+              description: Amount of the transaction
+            transactiontype:
+              type: string
+              description: Transaction type of the transaction
+            category:
+              type: string
+              description: Category of transaction
+            note:
+              type: string
+              description: note of transaction
+    NewTransaction:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: AccountId containing the new transaction
+        description:
+          type: string
+          description: Description of the new transaction
+        amount:
+          type: number
+          description: Amount of the new transaction
+        transactiontype:
+          type: string
+          description: Transaction type of the transaction
+        category:
+          type: string
+          description: Category of the new transaction
+        note:
+          type: string
+          description: note of the new transaction
+    EditTransaction:
+      type: object
+      properties:
+        category:
+          type: string
+          description: New category of this transaction
+        note:
+          type: string
+          description: New note of this transaction
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
