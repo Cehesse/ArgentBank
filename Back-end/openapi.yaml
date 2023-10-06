@@ -269,42 +269,6 @@ paths:
       security:
       - Bearer: []
       x-codegen-request-body-name: body
-    delete:
-      tags:
-      - Transactions module
-      summary: Transaction Delete API
-      description: API for deleting a transaction
-      parameters:
-      - name: Authorization
-        in: header
-        description: Attach token
-        required: true
-        schema:
-          type: string
-      - name: idTransaction
-        in: path
-        description: Id of the transaction that needs to be deleted
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: Transaction deleted successfully
-          content: {}
-        400:
-          description: Invalid Fields
-          content: {}
-        401:
-          description: Unauthorized
-          content: {}
-        404:
-          description: Transaction not found
-          content: {}
-        500:
-          description: Internal Server Error
-          content: {}
-      security:
-      - Bearer: []
 components:
   schemas:
     User:
@@ -373,6 +337,9 @@ components:
                 id:
                   type: string
                   description: Id of the transaction
+                accountId:
+                  type: string
+                  description: AccountId containing the new transaction
                 date:
                   type: string
                   description: Date of the transaction
@@ -405,6 +372,9 @@ components:
             id:
               type: string
               description: Id of the transaction
+            accountId:
+              type: string
+              description: AccountId containing the new transaction
             date:
               type: string
               description: Date of the transaction
