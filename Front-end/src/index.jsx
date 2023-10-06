@@ -25,7 +25,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router>
+        <Router basename="/ArgentBank">
           <div className="App">
             <Header />
               <Routes>
