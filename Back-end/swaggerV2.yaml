@@ -124,43 +124,9 @@ paths:
           description: Invalid Fields
         '401':
           description: Unauthorized
-        '404':
-          description: Transactions not found
         '500':
           description: Internal Server Error
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions module
-      summary: Transaction Add API
-      description: API for adding a new transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach token
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Transaction info needed to create a new transaction
-          required: true
-          schema:
-            $ref: '#/definitions/NewTransaction'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Transaction added successfully
-          schema:
-            $ref: '#/definitions/TransactionApiResponse'
-        '400':
-          description: Invalid Fields
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
-  /user/transaction/{idTransaction}:
+  /user/transactions/{idTransaction}:
     get:
       security:
         - Bearer: []
@@ -190,11 +156,13 @@ paths:
           description: Invalid Fields
         '401':
           description: Unauthorized
+        '403':
+          description: Forbidden 
         '404':
           description: Transaction not found
         '500':
           description: Internal Server Error
-    put:
+    patch:
       security:
         - Bearer: []
       tags:
@@ -229,6 +197,8 @@ paths:
           description: Invalid Fields
         '401':
           description: Unauthorized
+        '403':
+          description: Forbidden 
         '404':
           description: Transaction not found
         '500':
@@ -288,42 +258,43 @@ definitions:
       token:
         type: string
   Transactions:
+    type: object
     properties:
       status:
         type: integer
       message:
         type: string
       body:
-        type: object
-        properties:
-          transaction:
-            type: object
-            description: transaction
-            properties:
-              id:
-                type: string
-                description: Id of the transaction
-              accountId:
-                type: string
-                description: AccountId containing the new transaction
-              date:
-                type: string
-                description: Date of the transaction
-              description:
-                type: string
-                description: Description of transaction
-              amount:
-                type: number
-                description: Amount of the transaction
-              transactiontype:
-                type: string
-                description: Transaction type of the transaction
-              category:
-                type: string
-                description: Category of transaction
-              note:
-                type: string
-                description: note of transaction
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Id of the transaction
+      accountId:
+        type: string
+        description: AccountId containing the new transaction
+      date:
+        type: string
+        description: Date of the transaction
+      description:
+        type: string
+        description: Description of transaction
+      amount:
+        type: number
+        description: Amount of the transaction
+      transactiontype:
+        type: string
+        description: Transaction type of the transaction
+      category:
+        type: string
+        description: Category of transaction
+      note:
+        type: string
+        description: note of transaction
   TransactionApiResponse:
     properties:
       status:
@@ -357,26 +328,6 @@ definitions:
           note:
             type: string
             description: note of transaction
-  NewTransaction:
-    properties:
-      accountId:
-        type: string
-        description: AccountId containing the new transaction
-      description:
-        type: string
-        description: Description of the new transaction
-      amount:
-        type: number
-        description: Amount of the new transaction
-      transactiontype:
-        type: string
-        description: Transaction type of the transaction
-      category:
-        type: string
-        description: Category of the new transaction
-      note:
-        type: string
-        description: note of the new transaction
   EditTransaction:
     properties:
       category:
